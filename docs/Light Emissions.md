@@ -1,7 +1,5 @@
 # Light Emissions
 
-[TODO: Overview with a timing diagram]
-
 ## Sync Pulse
 
 The synchronization pulse is a short flash of light that base stations emit periodically.
@@ -40,6 +38,28 @@ Given a measured pulse length the best match can be found using:
 
 Given the 3 bits the pulse length can be calculated:  
 `length = 3000 + axis*500 + data*1000 + skip*2000`
+
+### Overall Sequence
+
+![Timing Diagram](images/Emissions%20-%20TDM%20-%20TX%20and%20RX.png)
+
+The lighthouse sequence is as follows:
+
+Tick Start | Emission | Lighthouse
+-----------|----------|-----------------
+0      | ACode 0b1x0 (4)| B
+20000 | ACode 0b0x0 (0)|  A/C
+40000 |LH A X Sweep| A
+400000|  ACode 0b1x1 (5)|  B
+420000|  ACode 0b0x1 (1)|  A/C
+440000|LH A Y SWEEP| A
+800000|  ACode 0b0x0 (0)|  B
+820000|  ACode 0b1x0 (4)|  A/C
+840000|LH B X Sweep| B
+1200000|  ACode 0b0x1 (1)| B
+1220000|  ACode 0b1x1 (5)| A/C
+1240000|LH B Y SWEEP| B
+1600000| <<Repeat>> |
 
 ### OOTX Frame
 
